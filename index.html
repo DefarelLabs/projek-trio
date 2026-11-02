@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HUJAN COLLECTIVE // RDYNM Workgroup — Independent Engineering & Design Studio</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            carbon: {
+              950: '#090A0D',
+              900: '#101217',
+              850: '#161920',
+              800: '#1E222B',
+              700: '#2A303C',
+            },
+            rain: {
+              400: '#38BDF8',
+              500: '#0EA5E9',
+              600: '#0284C7',
+            },
+            emerald: {
+              400: '#34D399',
+              500: '#10B981',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-[#F6F5F2] dark:bg-carbon-950 text-zinc-900 dark:text-zinc-100 selection:bg-sky-500/20 selection:text-sky-400 transition-colors duration-200 min-h-screen flex flex-col">
+
+  <!-- TOP TELEMETRY RIBBON -->
+  <div class="border-b border-zinc-200/80 dark:border-white/[0.07] bg-white/60 dark:bg-carbon-950/90 backdrop-blur-md text-[11px] font-mono text-zinc-500 dark:text-zinc-400 py-1.5 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400 font-medium">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 status-dot"></span>
+          <span id="telemetry-status">SYS.ONLINE // OPEN FOR COLLABORATION</span>
+        </span>
+        <span class="hidden md:inline text-zinc-300 dark:text-zinc-700">|</span>
+        <span class="hidden md:inline tabular-nums">JKT — 06°12'31.7"S 106°50'44.2"E</span>
+      </div>
+      <div class="flex items-center gap-3 sm:gap-4">
+        <span class="hidden sm:inline tabular-nums" id="live-clock">UTC+7 // 09:30 WIB</span>
+        <button id="btn-open-cmd" type="button" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded border border-zinc-300 dark:border-zinc-800 bg-zinc-100/80 dark:bg-zinc-900/80 hover:border-sky-500/50 text-zinc-700 dark:text-zinc-300 transition">
+          <span>Quick Jump</span>
+          <kbd class="text-[10px] px-1 bg-white dark:bg-zinc-800 rounded border border-zinc-200 dark:border-zinc-700">⌘K</kbd>
+        </button>
+        <button id="btn-open-customizer" type="button" class="inline-flex items-center gap-1 text-sky-600 dark:text-sky-400 hover:underline font-medium">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+          <span>Kustomisasi Nama & Tim</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STICKY ARCHITECTURAL NAVIGATION -->
+  <header class="sticky top-0 z-40 border-b border-zinc-200/80 dark:border-white/[0.08] bg-[#F6F5F2]/85 dark:bg-carbon-950/85 backdrop-blur-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <!-- Brand Identity -->
+      <a href="#home" data-nav="home" class="nav-link group flex items-center gap-3 focus:outline-none">
+        <div class="w-9 h-9 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 flex items-center justify-center font-mono font-bold text-sm tracking-tighter shadow-sm group-hover:bg-sky-500 dark:group-hover:bg-sky-400 transition-colors">
+          <span id="brand-monogram">HJN</span>
+        </div>
+        <div class="flex flex-col">
+          <div class="flex items-center gap-2">
+            <span id="brand-name-nav" class="font-display font-bold tracking-tight text-sm sm:text-base text-zinc-900 dark:text-white">HUJAN COLLECTIVE</span>
+            <span id="brand-code-nav" class="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-200/80 dark:bg-zinc-800/90 text-zinc-600 dark:text-zinc-400 border border-zinc-300/60 dark:border-white/5">RDYNM</span>
+          </div>
+          <span class="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 hidden sm:inline">Engineering & Digital Workgroup</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links (Matches exact user roadmap) -->
+      <nav aria-label="Main Navigation" class="hidden lg:flex items-center gap-1 p-1 rounded-lg bg-zinc-200/60 dark:bg-zinc-900/80 border border-zinc-300/60 dark:border-white/[0.06]">
+        <a href="#home" data-nav="home" class="nav-link px-3 py-1.5 rounded-md text-xs font-mono font-medium transition-all bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm">01.HOME</a>
+        <a href="#about" data-nav="about" class="nav-link px-3 py-1.5 rounded-md text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">02.ABOUT</a>
+        <a href="#team" data-nav="team" class="nav-link px-3 py-1.5 rounded-md text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">03.TEAM</a>
+        <a href="#projects" data-nav="projects" class="nav-link px-3 py-1.5 rounded-md text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">04.PROJECTS</a>
+        <a href="#services" data-nav="services" class="nav-link px-3 py-1.5 rounded-md text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">05.SERVICES</a>
+        <a href="#contact" data-nav="contact" class="nav-link px-3 py-1.5 rounded-md text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all">06.CONTACT</a>
+      </nav>
+
+      <!-- Right Controls: View Mode, Theme Toggle, CTA, Mobile Menu -->
+      <div class="flex items-center gap-2">
+        <!-- View Mode Toggle (Full Scroll vs Section Focus) -->
+        <button id="btn-view-mode" type="button" title="Ubah mode tampilan: Scroll Penuh vs Fokus Per Halaman" class="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-zinc-300/80 dark:border-white/10 bg-white/70 dark:bg-zinc-900/70 text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:border-sky-500/40 transition">
+          <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
+          <span id="view-mode-label">Mode: Scroll</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button id="btn-theme-toggle" type="button" aria-label="Toggle Dark/Light Mode" class="p-2 rounded-lg border border-zinc-300/80 dark:border-white/10 bg-white/70 dark:bg-zinc-900/70 text-zinc-700 dark:text-zinc-300 hover:border-sky-500/40 transition">
+          <svg id="icon-sun" class="w-4 h-4 hidden dark:block text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <svg id="icon-moon" class="w-4 h-4 block dark:hidden text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
+        <!-- Primary Call to Action -->
+        <a href="#contact" data-nav="contact" class="nav-link hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-display font-semibold text-xs hover:bg-sky-600 dark:hover:bg-sky-400 transition-colors">
+          <span>Hubungi Kami</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button id="btn-mobile-menu" type="button" aria-label="Buka Menu Navigasi" class="lg:hidden p-2 rounded-lg border border-zinc-300/80 dark:border-white/10 bg-white/70 dark:bg-zinc-900/70 text-zinc-700 dark:text-zinc-300">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-zinc-200 dark:border-white/10 bg-[#F6F5F2] dark:bg-carbon-900 px-4 py-3 space-y-1.5">
+      <div class="grid grid-cols-2 gap-1.5">
+        <a href="#home" data-nav="home" class="nav-link px-3 py-2 rounded-md text-xs font-mono bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white">01 // HOME</a>
+        <a href="#about" data-nav="about" class="nav-link px-3 py-2 rounded-md text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:bg-white/50 dark:hover:bg-zinc-800/60">02 // ABOUT</a>
+        <a href="#team" data-nav="team" class="nav-link px-3 py-2 rounded-md text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:bg-white/50 dark:hover:bg-zinc-800/60">03 // TEAM</a>
+        <a href="#projects" data-nav="projects" class="nav-link px-3 py-2 rounded-md text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:bg-white/50 dark:hover:bg-zinc-800/60">04 // PROJECTS</a>
+        <a href="#services" data-nav="services" class="nav-link px-3 py-2 rounded-md text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:bg-white/50 dark:hover:bg-zinc-800/60">05 // SERVICES</a>
+        <a href="#contact" data-nav="contact" class="nav-link px-3 py-2 rounded-md text-xs font-mono text-zinc-600 dark:text-zinc-300 hover:bg-white/50 dark:hover:bg-zinc-800/60">06 // CONTACT</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN ARCHITECTURAL CONTAINER -->
+  <main class="flex-1 architectural-grid">
+
+    <!-- ================================================================= -->
+    <!-- 01 // HOME SECTION                                                -->
+    <!-- ├── Hero Section/Nama Workgroup                                   -->
+    <!-- ├── Highlight Proyek Terbaru                                      -->
+    <!-- ├── Ringkasan Tim                                                 -->
+    <!-- └── Call (Hubungi Kami)                                           -->
+    <!-- ================================================================= -->
+    <section id="home" data-section="home" class="app-section border-b border-zinc-200/80 dark:border-white/[0.08]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-16 lg:pt-16 lg:pb-24">
+        
+        <!-- 1.1 HERO SECTION / NAMA WORKGROUP -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          
+          <!-- Left Column: Typography & Identity -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex flex-wrap items-center gap-2 px-3 py-1 rounded-full bg-white dark:bg-zinc-900 border border-zinc-300/80 dark:border-white/10 text-xs font-mono">
+              <span class="text-sky-600 dark:text-sky-400 font-semibold">01 // WORKGROUP COLLECTIVE</span>
+              <span class="text-zinc-300 dark:text-zinc-700">•</span>
+              <span id="hero-badge-roster" class="text-zinc-600 dark:text-zinc-400">Rafly · Defarel · Yanda · Nabil · Nadip · Maman · Hujan</span>
+            </div>
+
+            <div class="space-y-3">
+              <p id="hero-moniker" class="font-mono text-xs sm:text-sm uppercase tracking-widest text-zinc-500 dark:text-zinc-400">
+                RDYNM // DIGITAL ENGINEERING & PRODUCT COLLECTIVE
+              </p>
+              <h1 class="font-display font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.06] text-zinc-900 dark:text-white">
+                <span id="hero-brand-title">Hujan Collective.</span><br />
+                <span class="text-zinc-500 dark:text-zinc-400 font-semibold">Arsitektur kode presisi &amp; produk digital berkarakter.</span>
+              </h1>
+            </div>
+
+            <p id="hero-description" class="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl">
+              Kami adalah kelompok kerja independen (<em class="not-italic font-medium text-zinc-900 dark:text-white">workgroup</em>) yang merancang dan membangun aplikasi web skala produksi, sistem terdistribusi, serta antarmuka interaktif. Tanpa birokrasi berbelit—langsung dikerjakan oleh para <em class="not-italic font-medium text-zinc-900 dark:text-white">engineer</em> dan desainer di balik kode.
+            </p>
+
+            <!-- Hero CTAs -->
+            <div class="flex flex-wrap items-center gap-3 pt-2">
+              <a href="#projects" data-nav="projects" class="nav-link inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-display font-semibold text-sm hover:bg-sky-600 dark:hover:bg-sky-400 transition shadow-sm">
+                <span>Eksplorasi Proyek</span>
+                <span class="font-mono text-xs px-1.5 py-0.5 rounded bg-white/15 dark:bg-zinc-900/15" id="hero-project-count">06</span>
+              </a>
+              <a href="#contact" data-nav="contact" class="nav-link inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white/80 dark:bg-zinc-900/80 text-zinc-800 dark:text-zinc-200 font-display font-semibold text-sm hover:border-sky-500/60 transition">
+                <span>Diskusikan Proyek</span>
+                <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+              </a>
+              <a href="#team" data-nav="team" class="nav-link inline-flex items-center gap-1.5 px-3.5 py-3 text-xs font-mono text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition">
+                <span>Kenali Anggota Tim →</span>
+              </a>
+            </div>
+
+            <!-- Key Telemetry Strip -->
+            <div class="pt-6 border-t border-zinc-200/80 dark:border-white/[0.08] grid grid-cols-3 gap-4 sm:gap-8">
+              <div>
+                <div class="font-mono text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white tabular-nums" id="metric-members-count">5+2</div>
+                <div class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-0.5">Core Engineers &amp; Roster</div>
+              </div>
+              <div>
+                <div class="font-mono text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white tabular-nums">99.94%</div>
+                <div class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-0.5">Production Uptime SLA</div>
+              </div>
+              <div>
+                <div class="font-mono text-2xl sm:text-3xl font-bold text-emerald-600 dark:text-emerald-400 tabular-nums">&lt; 45ms</div>
+                <div class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mt-0.5">Avg. Edge Response</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Editorial Studio Visual + Interactive Terminal Spec -->
+          <div class="lg:col-span-5 space-y-4">
+            <div class="rounded-xl overflow-hidden border border-zinc-300/80 dark:border-white/10 bg-white dark:bg-carbon-900 shadow-xl">
+              <!-- Window Header -->
+              <div class="px-4 py-2.5 border-b border-zinc-200 dark:border-white/[0.07] flex items-center justify-between bg-zinc-100/70 dark:bg-carbon-950/60">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-sky-500"></span>
+                </div>
+                <span class="font-mono text-[11px] text-zinc-500 dark:text-zinc-400">studio://hujan-collective/jakarta-hq</span>
+                <span class="font-mono text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">LIVE</span>
+              </div>
+              <!-- Studio Image -->
+              <div class="relative aspect-video overflow-hidden bg-zinc-900">
+                <img src="assets/studio-hero.jpg" alt="Hujan Collective Studio Workspace" class="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-700" />
+                <div class="absolute inset-0 bg-gradient-to-t from-carbon-950/90 via-carbon-950/20 to-transparent"></div>
+                <div class="absolute bottom-3 left-3 right-3 flex items-end justify-between text-white">
+                  <div>
+                    <p class="font-mono text-[10px] uppercase tracking-wider text-sky-300">WORKGROUP ENVIRONMENT</p>
+                    <p class="font-display font-semibold text-sm">Late-Night Engineering Session · Jakarta</p>
+                  </div>
+                  <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-black/60 backdrop-blur border border-white/15">v2026.11</span>
+                </div>
+              </div>
+              <!-- Interactive Architecture Spec Box -->
+              <div class="p-4 bg-zinc-50 dark:bg-carbon-900 font-mono text-xs space-y-2 border-t border-zinc-200 dark:border-white/[0.06]">
+                <div class="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
+                  <span>$ hujan-cli roster --status</span>
+                  <button id="btn-cycle-roster-mode" type="button" class="text-[11px] text-sky-600 dark:text-sky-400 hover:underline">
+                    Ubah Mode Roster →
+                  </button>
+                </div>
+                <div id="hero-terminal-output" class="p-2.5 rounded bg-zinc-900 text-zinc-200 text-[11px] leading-relaxed overflow-x-auto">
+                  <span class="text-emerald-400">✓</span> workgroup: <span class="text-sky-300" id="terminal-wg-name">"HUJAN COLLECTIVE (RDYNM)"</span><br/>
+                  <span class="text-emerald-400">✓</span> roster: [<span class="text-amber-300">"Rafly"</span>, <span class="text-amber-300">"Defarel"</span>, <span class="text-amber-300">"Yanda"</span>, <span class="text-amber-300">"Nabil"</span>, <span class="text-amber-300">"Nadip"</span>, <span class="text-amber-300">"Maman"</span>, <span class="text-amber-300">"Hujan"</span>]<br/>
+                  <span class="text-emerald-400">✓</span> stack: TypeScript · Go · Rust · Next.js · Flutter · Cloud Native
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 1.2 HIGHLIGHT PROYEK TERBARU (HOME SUB-SECTION) -->
+        <div class="mt-16 lg:mt-24 pt-12 border-t border-zinc-200/80 dark:border-white/[0.08] crosshair">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+            <div>
+              <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-1">01.A // HIGHLIGHT PROYEK TERBARU</div>
+              <h2 class="font-display font-bold text-2xl sm:text-3xl text-zinc-900 dark:text-white tracking-tight">Karya Produksi &amp; Eksperimen Terpilih</h2>
+            </div>
+            <a href="#projects" data-nav="projects" class="nav-link inline-flex items-center gap-1.5 font-mono text-xs text-zinc-600 dark:text-zinc-400 hover:text-sky-500 dark:hover:text-sky-400 transition">
+              <span>Lihat Semua 6 Proyek di Portfolio</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+          </div>
+
+          <div id="home-featured-projects" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Dynamically populated by JS from flagship projects -->
+          </div>
+        </div>
+
+        <!-- 1.3 RINGKASAN TIM & 1.4 CALL (HUBUNGI KAMI) (HOME SUB-SECTION) -->
+        <div class="mt-16 pt-12 border-t border-zinc-200/80 dark:border-white/[0.08] grid grid-cols-1 lg:grid-cols-12 gap-6 crosshair">
+          
+          <!-- 1.3 Ringkasan Tim -->
+          <div class="lg:col-span-7 p-6 sm:p-8 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-3">
+                <span class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider">01.B // RINGKASAN TIM</span>
+                <span id="home-team-pill" class="font-mono text-[11px] px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300">Lintas Disiplin Teknis</span>
+              </div>
+              <h3 class="font-display font-bold text-xl sm:text-2xl text-zinc-900 dark:text-white mb-2">
+                Satu Kolektif, Spektrum Engineering Penuh
+              </h3>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+                Dibangun oleh kolaborasi <strong class="text-zinc-900 dark:text-zinc-200">Rafly, Defarel, Yanda, Nabil, Nadip, Maman, dan Hujan</strong>. Setiap anggota memegang spesialisasi terfokus mulai dari arsitektur sistem terdistribusi, rekayasa antarmuka modern, desain produk, hingga keandalan infrastruktur cloud.
+              </p>
+              <!-- Compact Interactive Member Chips -->
+              <div id="home-team-strip" class="flex flex-wrap gap-2 mb-6">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+            <div class="pt-4 border-t border-zinc-100 dark:border-white/[0.06] flex items-center justify-between">
+              <span class="font-mono text-xs text-zinc-500 dark:text-zinc-400">Klik nama anggota untuk melihat keahlian detail</span>
+              <a href="#team" data-nav="team" class="nav-link font-mono text-xs font-semibold text-sky-600 dark:text-sky-400 hover:underline">Profil Lengkap Tim →</a>
+            </div>
+          </div>
+
+          <!-- 1.4 Call (Hubungi Kami) -->
+          <div class="lg:col-span-5 p-6 sm:p-8 rounded-xl border border-zinc-900 dark:border-sky-500/30 bg-zinc-900 dark:bg-gradient-to-br dark:from-carbon-900 dark:via-carbon-900 dark:to-sky-950/40 text-white flex flex-col justify-between relative overflow-hidden">
+            <div class="relative z-10">
+              <div class="font-mono text-xs text-sky-400 uppercase tracking-wider mb-3">01.C // CALL (HUBUNGI KAMI)</div>
+              <h3 class="font-display font-bold text-xl sm:text-2xl mb-2">
+                Punya Ide Produk atau Butuh Eksekusi Teknis?
+              </h3>
+              <p class="text-sm text-zinc-300 leading-relaxed mb-6">
+                Diskusikan arsitektur sistem, pembuatan MVP, *redesign* platform, atau kolaborasi riset bersama tim kami. Respons cepat langsung dari *lead engineer*.
+              </p>
+            </div>
+            <div class="relative z-10 space-y-2.5">
+              <div class="flex flex-wrap gap-2.5">
+                <a href="#contact" data-nav="contact" class="nav-link flex-1 text-center px-4 py-2.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-zinc-950 font-display font-bold text-xs transition">
+                  Buka Form Diskusi Proyek
+                </a>
+                <button id="btn-home-wa" type="button" class="px-4 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-white font-mono text-xs transition inline-flex items-center gap-1.5">
+                  <span>WhatsApp</span>
+                  <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </button>
+              </div>
+              <div class="font-mono text-[11px] text-zinc-400 flex items-center justify-between pt-2">
+                <span>Estimasi respons: &lt; 2 jam kerja</span>
+                <button id="btn-copy-email-hero" type="button" class="text-sky-400 hover:underline">Salin Email</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 02 // ABOUT SECTION                                               -->
+    <!-- ├── Tentang Workgroup                                             -->
+    <!-- ├── Visi & Misi                                                   -->
+    <!-- ├── Sejarah Singkat                                               -->
+    <!-- └── Nilai / Value Tim                                             -->
+    <!-- ================================================================= -->
+    <section id="about" data-section="about" class="app-section border-b border-zinc-200/80 dark:border-white/[0.08]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        
+        <!-- Section Header -->
+        <div class="max-w-3xl mb-12">
+          <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2">02 // ABOUT THE WORKGROUP</div>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-zinc-900 dark:text-white tracking-tight">
+            Mengenal <span class="brand-name-inline">Hujan Collective</span> (RDYNM)
+          </h2>
+          <p class="mt-3 text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Filosofi teknis, perjalanan terbentuknya tim, serta prinsip kerja yang menjaga standar kualitas setiap baris kode yang kami rilis.
+          </p>
+        </div>
+
+        <!-- 2.1 TENTANG WORKGROUP & 2.2 VISI & MISI -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-16 crosshair">
+          
+          <!-- 2.1 Tentang Workgroup -->
+          <div class="lg:col-span-6 p-6 sm:p-8 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 flex flex-col justify-between space-y-6">
+            <div class="space-y-4">
+              <div class="inline-flex items-center gap-2 font-mono text-xs text-sky-600 dark:text-sky-400">
+                <span>02.A // TENTANG WORKGROUP</span>
+              </div>
+              <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white">
+                Kolektif Rekayasa Perangkat Lunak &amp; Desain Digital Independen
+              </h3>
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                <strong class="text-zinc-900 dark:text-white brand-name-inline">Hujan Collective</strong> (dengan kode formasi <span class="font-mono text-xs px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800">RDYNM // Hujan</span>) lahir dari kesamaan frekuensi teknis antara <strong class="text-zinc-900 dark:text-white">Rafly, Defarel, Yanda, Nabil, Nadip, Maman, dan Hujan</strong>. Kami memilih format <em>workgroup</em> agar setiap anggota tetap terlibat langsung dalam perancangan arsitektur, penulisan kode, dan pengujian produk.
+              </p>
+              <p class="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed">
+                Nama <strong>"Hujan"</strong> merepresentasikan presisi yang tenang namun berdampak nyata—seperti rintik air yang membentuk ekosistem, setiap modul mikro yang kami rancang saling terhubung membentuk sistem digital yang tangguh, cepat, dan mudah dipelihara untuk jangka panjang.
+              </p>
+            </div>
+
+            <!-- Etymology / Code Breakdown Box -->
+            <div class="p-4 rounded-lg bg-zinc-100/80 dark:bg-carbon-950 border border-zinc-200/80 dark:border-white/[0.06] font-mono text-xs">
+              <div class="text-zinc-500 dark:text-zinc-400 mb-2">// ETIMOLOGI FORMASI RDYNM-HUJAN</div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-zinc-800 dark:text-zinc-200">
+                <div><span class="text-sky-500 font-bold">[R]</span> Rafly</div>
+                <div><span class="text-sky-500 font-bold">[D]</span> Defarel</div>
+                <div><span class="text-sky-500 font-bold">[Y]</span> Yanda</div>
+                <div><span class="text-sky-500 font-bold">[N]</span> Nabil</div>
+                <div><span class="text-sky-500 font-bold">[N]</span> Nadip</div>
+                <div><span class="text-sky-500 font-bold">[M]</span> Maman</div>
+                <div class="col-span-2"><span class="text-emerald-500 font-bold">[HUJAN]</span> Core Identity</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2.2 Visi & Misi -->
+          <div class="lg:col-span-6 p-6 sm:p-8 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 flex flex-col justify-between space-y-6">
+            <div>
+              <div class="inline-flex items-center gap-2 font-mono text-xs text-sky-600 dark:text-sky-400 mb-3">
+                <span>02.B // VISI &amp; MISI</span>
+              </div>
+              
+              <!-- Visi -->
+              <div class="p-5 rounded-lg bg-zinc-900 dark:bg-carbon-950 text-white border border-zinc-800 dark:border-white/10 mb-6">
+                <div class="font-mono text-[11px] text-sky-400 uppercase tracking-wider mb-1">VISI UTAMA</div>
+                <p class="font-display font-semibold text-base sm:text-lg leading-snug">
+                  "Menjadi kolektif rekayasa teknologi independen yang menetapkan standar baru dalam keandalan arsitektur sistem dan ketajaman desain antarmuka di Indonesia."
+                </p>
+              </div>
+
+              <!-- Misi -->
+              <div class="space-y-3">
+                <div class="font-mono text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">MISI WORKGROUP</div>
+                <ul class="space-y-3 text-sm text-zinc-700 dark:text-zinc-300">
+                  <li class="flex items-start gap-3">
+                    <span class="font-mono text-xs px-2 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 mt-0.5">M.01</span>
+                    <span><strong>Rekayasa Tanpa Kompromi:</strong> Membangun produk digital dengan kode yang bersih, teruji secara otomatis, dan siap menangani skala trafik tinggi.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-mono text-xs px-2 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 mt-0.5">M.02</span>
+                    <span><strong>Desain Berbasis Fungsi:</strong> Menghadirkan antarmuka pengguna yang intuitif, responsif, dan bebas dari ornamen visual yang memperlambat performa.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-mono text-xs px-2 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 mt-0.5">M.03</span>
+                    <span><strong>Kolaborasi Terbuka &amp; Edukatif:</strong> Berkontribusi aktif pada ekosistem <em>open-source</em> dan berbagi riset teknis antar sesama <em>developer</em>.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="font-mono text-xs px-2 py-0.5 rounded bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20 mt-0.5">M.04</span>
+                    <span><strong>Transparansi Kemitraan:</strong> Menjalankan komunikasi teknis yang jujur, terukur, dan tepat waktu bersama setiap mitra maupun klien.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 2.3 SEJARAH SINGKAT (TIMELINE) -->
+        <div class="mb-16 pt-12 border-t border-zinc-200/80 dark:border-white/[0.08] crosshair">
+          <div class="mb-8">
+            <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-1">02.C // SEJARAH SINGKAT</div>
+            <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white">Jejak Evolusi Workgroup</h3>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Milestone 1 -->
+            <div class="p-5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 relative">
+              <div class="flex items-center justify-between font-mono text-xs mb-3">
+                <span class="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-semibold">FASE 01 // 2023</span>
+                <span class="text-zinc-400">Genesis</span>
+              </div>
+              <h4 class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2">Diskusi Larut Malam &amp; Hackathon</h4>
+              <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Berawal dari grup diskusi pemrograman saat hujan deras di akhir pekan. Rafly, Defarel, Yanda, Nabil, dan Nadip mulai membangun prototipe bersama dan memenangkan kompetisi pengembangan aplikasi.
+              </p>
+            </div>
+
+            <!-- Milestone 2 -->
+            <div class="p-5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 relative">
+              <div class="flex items-center justify-between font-mono text-xs mb-3">
+                <span class="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-semibold">FASE 02 // 2024</span>
+                <span class="text-zinc-400">Formasi</span>
+              </div>
+              <h4 class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2">Standarisasi Workgroup &amp; Infrastruktur</h4>
+              <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Menetapkan alur kerja Git, standar <em>code review</em>, dan <em>design system</em> internal. Maman dan Hujan memperkuat lini operasional, DevOps, serta identitas kreatif tim.
+              </p>
+            </div>
+
+            <!-- Milestone 3 -->
+            <div class="p-5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 relative">
+              <div class="flex items-center justify-between font-mono text-xs mb-3">
+                <span class="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-semibold">FASE 03 // 2025</span>
+                <span class="text-zinc-400">Skala</span>
+              </div>
+              <h4 class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2">Rilis Produk Skala Produksi</h4>
+              <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Meluncurkan platform analitik finansial, aplikasi mobilitas pintar, dan komponen UI open-source yang diadopsi oleh ratusan pengembang lokal maupun regional.
+              </p>
+            </div>
+
+            <!-- Milestone 4 -->
+            <div class="p-5 rounded-xl border border-sky-500/40 bg-white dark:bg-carbon-900 relative shadow-sm">
+              <div class="flex items-center justify-between font-mono text-xs mb-3">
+                <span class="px-2 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-400 font-semibold">FASE 04 // 2026</span>
+                <span class="text-emerald-500 font-medium">● Aktif</span>
+              </div>
+              <h4 class="font-display font-bold text-base text-zinc-900 dark:text-white mb-2">Hujan Collective Studio v2.4</h4>
+              <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Beroperasi penuh sebagai kolektif <em>engineering &amp; product studio</em> yang melayani kemitraan strategis, audit arsitektur, dan pembangunan aplikasi kustom berkinerja tinggi.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2.4 NILAI / VALUE TIM -->
+        <div class="pt-12 border-t border-zinc-200/80 dark:border-white/[0.08] crosshair">
+          <div class="mb-8">
+            <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-1">02.D // NILAI / VALUE TIM</div>
+            <h3 class="font-display font-bold text-2xl text-zinc-900 dark:text-white">Prinsip Engineering yang Kami Pegang</h3>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="p-6 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900">
+              <div class="font-mono text-xs text-zinc-400 mb-3">VAL // 01</div>
+              <h4 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2">Craft Over Shortcuts</h4>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Kami menulis kode yang mudah dibaca manusia, bukan sekadar berjalan di mesin. Arsitektur modular mencegah utang teknis di masa depan.
+              </p>
+            </div>
+            <div class="p-6 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900">
+              <div class="font-mono text-xs text-zinc-400 mb-3">VAL // 02</div>
+              <h4 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2">Zero-Bloat Performance</h4>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Setiap milidetik berharga. Kami mengoptimalkan ukuran bundel, <em>query</em> basis data, dan <em>rendering</em> DOM agar aplikasi terasa instan.
+              </p>
+            </div>
+            <div class="p-6 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900">
+              <div class="font-mono text-xs text-zinc-400 mb-3">VAL // 03</div>
+              <h4 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2">Radical Ownership</h4>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Setiap anggota bertanggung jawab penuh dari tahap perancangan skema hingga pemantauan server pasca-rilis. Tanpa lempar tanggung jawab.
+              </p>
+            </div>
+            <div class="p-6 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900">
+              <div class="font-mono text-xs text-zinc-400 mb-3">VAL // 04</div>
+              <h4 class="font-display font-bold text-lg text-zinc-900 dark:text-white mb-2">Calm &amp; Clear Async</h4>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Dokumentasi tertulis yang rapi, spesifikasi API yang jelas, dan komunikasi terstruktur layaknya rintik hujan yang teratur.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 03 // TEAM SECTION                                                -->
+    <!-- ├── Daftar Anggota (Foto, Nama, Role/Posisi, Skill/Keahlian)      -->
+    <!-- └── Deskripsi Singkat Tiap Anggota                                -->
+    <!-- ================================================================= -->
+    <section id="team" data-section="team" class="app-section border-b border-zinc-200/80 dark:border-white/[0.08]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        
+        <!-- Header & Roster Mode Controls -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+          <div class="max-w-2xl">
+            <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2">03 // TEAM ROSTER &amp; SPECIALISTS</div>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-zinc-900 dark:text-white tracking-tight">
+              Anggota Tim &amp; Spesialisasi Teknis
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+              Daftar lengkap anggota workgroup beserta foto profil, posisi, keahlian utama, dan deskripsi peran masing-masing. Anda juga dapat mengganti foto atau menyesuaikan formasi (5 Core / 7 Full Roster).
+            </p>
+          </div>
+
+          <!-- Roster Controls: 5 Core vs 7 Full + Division Filter + Add/Edit -->
+          <div class="flex flex-wrap items-center gap-2">
+            <div class="inline-flex p-1 rounded-lg bg-zinc-200/70 dark:bg-carbon-900 border border-zinc-300/70 dark:border-white/10">
+              <button type="button" data-roster-preset="all" class="roster-preset-btn px-3 py-1.5 rounded-md text-xs font-mono font-medium bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white shadow-sm transition">
+                Semua Nama (7)
+              </button>
+              <button type="button" data-roster-preset="core5" class="roster-preset-btn px-3 py-1.5 rounded-md text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition">
+                Formasi 5 Anggota
+              </button>
+            </div>
+
+            <button id="btn-add-member" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-carbon-900 text-xs font-mono font-medium text-zinc-800 dark:text-zinc-200 hover:border-sky-500/50 transition">
+              <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Tambah / Edit Anggota</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Division Filter Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-4 pb-6 mb-8 border-b border-zinc-200/80 dark:border-white/[0.08]">
+          <div class="flex flex-wrap items-center gap-1.5" id="team-role-filters">
+            <button type="button" data-team-filter="all" class="team-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-medium transition">Semua Divisi</button>
+            <button type="button" data-team-filter="Architecture & Backend" class="team-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-white/80 dark:bg-carbon-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-white/10 hover:border-sky-500/40 transition">Backend &amp; Systems</button>
+            <button type="button" data-team-filter="Frontend & Design" class="team-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-white/80 dark:bg-carbon-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-white/10 hover:border-sky-500/40 transition">Frontend &amp; UI/UX</button>
+            <button type="button" data-team-filter="Mobile, Cloud & Ops" class="team-filter-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-white/80 dark:bg-carbon-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200/80 dark:border-white/10 hover:border-sky-500/40 transition">Mobile, Cloud &amp; Ops</button>
+          </div>
+          <div class="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+            Menampilkan <span id="team-showing-count" class="font-bold text-zinc-900 dark:text-white">7</span> anggota aktif · Klik kartu untuk detail / ganti foto
+          </div>
+        </div>
+
+        <!-- Team Member Grid -->
+        <div id="team-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <!-- Hidden file input for instant local photo upload per member -->
+        <input type="file" id="member-photo-input" accept="image/*" class="hidden" />
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 04 // PROJECTS / PORTFOLIO SECTION                                -->
+    <!-- ├── Daftar Proyek (Nama, Deskripsi, Teknologi, Tahun, Link/Preview)-->
+    <!-- └── Filter Proyek                                                 -->
+    <!-- ================================================================= -->
+    <section id="projects" data-section="projects" class="app-section border-b border-zinc-200/80 dark:border-white/[0.08]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        
+        <!-- Header -->
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+          <div class="max-w-2xl">
+            <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2">04 // PROJECTS &amp; PORTFOLIO</div>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-zinc-900 dark:text-white tracking-tight">
+              Arsip Proyek &amp; Studi Kasus Teknis
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+              Setiap proyek dilengkapi rincian arsitektur, teknologi yang digunakan, tahun rilis, serta pratinjau interaktif (<em>Live Preview</em>).
+            </p>
+          </div>
+          <div>
+            <button id="btn-add-project" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border border-zinc-300 dark:border-white/10 bg-white dark:bg-carbon-900 text-xs font-mono font-medium text-zinc-800 dark:text-zinc-200 hover:border-sky-500/50 transition">
+              <svg class="w-3.5 h-3.5 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+              <span>Tambah Proyek Portfolio</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 4.2 FILTER PROYEK (Category + Year + Search) -->
+        <div class="p-4 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white/90 dark:bg-carbon-900/90 mb-8 space-y-4">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <!-- Category Filter Pills -->
+            <div class="flex flex-wrap items-center gap-1.5" id="project-category-filters">
+              <button type="button" data-proj-cat="all" class="proj-cat-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-medium transition">Semua Kategori</button>
+              <button type="button" data-proj-cat="Web App & SaaS" class="proj-cat-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition">Web App &amp; SaaS</button>
+              <button type="button" data-proj-cat="Mobile & IoT" class="proj-cat-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition">Mobile &amp; IoT</button>
+              <button type="button" data-proj-cat="Design System & 3D" class="proj-cat-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition">Design System &amp; 3D</button>
+              <button type="button" data-proj-cat="Open Source & Infra" class="proj-cat-btn px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white transition">Open Source &amp; Infra</button>
+            </div>
+
+            <!-- Year Filter + Search -->
+            <div class="flex flex-wrap items-center gap-2">
+              <label for="project-year-select" class="sr-only">Filter Tahun</label>
+              <select id="project-year-select" class="px-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800 border border-zinc-300/70 dark:border-white/10 text-zinc-800 dark:text-zinc-200 focus:outline-none focus:border-sky-500">
+                <option value="all">Semua Tahun (2024–2026)</option>
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+              </select>
+
+              <div class="relative flex-1 sm:w-56">
+                <input id="project-search-input" type="text" placeholder="Cari proyek / teknologi..." class="w-full pl-8 pr-3 py-1.5 rounded-lg text-xs font-mono bg-zinc-100 dark:bg-zinc-800 border border-zinc-300/70 dark:border-white/10 text-zinc-800 dark:text-zinc-200 placeholder-zinc-400 focus:outline-none focus:border-sky-500" />
+                <svg class="w-3.5 h-3.5 text-zinc-400 absolute left-2.5 top-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-[11px] font-mono text-zinc-500 dark:text-zinc-400 pt-2 border-t border-zinc-200/60 dark:border-white/[0.05]">
+            <span>Menampilkan <strong id="project-showing-count" class="text-zinc-900 dark:text-white">6</strong> proyek</span>
+            <button id="btn-reset-proj-filter" type="button" class="text-sky-600 dark:text-sky-400 hover:underline hidden">Reset Filter</button>
+          </div>
+        </div>
+
+        <!-- 4.1 DAFTAR PROYEK GRID -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 05 // SERVICES SECTION                                            -->
+    <!-- ├── Daftar Layanan yang Ditawarkan                                -->
+    <!-- └── Deskripsi Singkat Tiap Layanan                                -->
+    <!-- ================================================================= -->
+    <section id="services" data-section="services" class="app-section border-b border-zinc-200/80 dark:border-white/[0.08]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+          <div class="max-w-2xl">
+            <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2">05 // TECHNICAL SERVICES &amp; CAPABILITIES</div>
+            <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-zinc-900 dark:text-white tracking-tight">
+              Layanan Rekayasa &amp; Solusi Digital
+            </h2>
+            <p class="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+              Kami menawarkan layanan teknis ujung-ke-ujung dengan ruang lingkup kerja yang transparan. Pilih layanan di bawah untuk langsung memasukkan spesifikasi ke formulir konsultasi.
+            </p>
+          </div>
+          <div class="font-mono text-xs text-zinc-500 dark:text-zinc-400">
+            STANDAR KUALITAS // CI/CD · TYPE-SAFE · WCAG AA
+          </div>
+        </div>
+
+        <!-- Services Grid -->
+        <div id="services-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <!-- Populated dynamically by JS -->
+        </div>
+
+        <!-- Interactive Scope & Collaboration Estimator Strip -->
+        <div class="p-6 sm:p-8 rounded-xl border border-zinc-300/90 dark:border-white/10 bg-white dark:bg-carbon-900 crosshair">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+            <div class="lg:col-span-7 space-y-2">
+              <div class="font-mono text-xs text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">INTERACTIVE WORKFLOW // SPRINT ARCHITECTURE</div>
+              <h3 class="font-display font-bold text-xl text-zinc-900 dark:text-white">Bagaimana Cara Kami Bekerja Bersama Mitra?</h3>
+              <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                Setiap proyek dibagi ke dalam siklus <em>sprint</em> mingguan yang terukur: (1) <strong>Technical Discovery &amp; Blueprint</strong>, (2) <strong>Iterative Engineering &amp; Staging Preview</strong>, (3) <strong>Automated QA &amp; Load Testing</strong>, dan (4) <strong>Production Handover &amp; Documentation</strong>.
+              </p>
+            </div>
+            <div class="lg:col-span-5 flex flex-wrap sm:justify-end gap-3">
+              <button type="button" data-select-service="Full-Stack Web Application" class="service-quick-select px-4 py-2.5 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-display font-semibold text-xs hover:bg-sky-600 dark:hover:bg-sky-400 transition">
+                Konsultasi Web / SaaS →
+              </button>
+              <button type="button" data-select-service="UI/UX Design System & Prototyping" class="service-quick-select px-4 py-2.5 rounded-lg border border-zinc-300 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 font-mono text-xs hover:border-sky-500 transition">
+                Konsultasi UI/UX &amp; Design System
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- 06 // CONTACT SECTION                                             -->
+    <!-- ├── Form Kontak                                                   -->
+    <!-- ├── Email                                                         -->
+    <!-- ├── Nomor WhatsApp                                                -->
+    <!-- ├── Alamat                                                        -->
+    <!-- └── Social Media                                                  -->
+    <!-- ================================================================= -->
+    <section id="contact" data-section="contact" class="app-section">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+        
+        <div class="max-w-2xl mb-12">
+          <div class="font-mono text-xs text-sky-600 dark:text-sky-400 uppercase tracking-wider mb-2">06 // CONTACT &amp; DIRECT CHANNELS</div>
+          <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-zinc-900 dark:text-white tracking-tight">
+            Mulai Diskusi Bersama Tim Kami
+          </h2>
+          <p class="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-400">
+            Hubungi kami melalui formulir spesifikasi proyek, pesan langsung WhatsApp, atau kanal media sosial resmi workgroup di bawah ini.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- 6.1 FORM KONTAK (Left 7 Columns) -->
+          <div class="lg:col-span-7 p-6 sm:p-8 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 shadow-sm">
+            <div class="flex items-center justify-between pb-4 mb-6 border-b border-zinc-200/80 dark:border-white/[0.08]">
+              <div>
+                <span class="font-mono text-xs text-sky-600 dark:text-sky-400">06.A // FORM KONTAK &amp; BRIEF PROYEK</span>
+                <h3 class="font-display font-bold text-lg text-zinc-900 dark:text-white mt-0.5">Kirimkan Rincian Kebutuhan Anda</h3>
+              </div>
+              <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">Direct-to-Engineer</span>
+            </div>
+
+            <form id="contact-form" class="space-y-4" novalidate>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-name" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1.5">Nama Lengkap / Instansi *</label>
+                  <input id="contact-name" type="text" required placeholder="Contoh: Budi Santoso / PT Teknologi Nusantara" class="w-full px-3.5 py-2.5 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-sky-500" />
+                </div>
+                <div>
+                  <label for="contact-email" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1.5">Alamat Email / Kontak *</label>
+                  <input id="contact-email" type="email" required placeholder="nama@perusahaan.com" class="w-full px-3.5 py-2.5 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-sky-500" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="contact-service" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1.5">Layanan yang Dibutuhkan</label>
+                  <select id="contact-service" class="w-full px-3.5 py-2.5 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white focus:outline-none focus:border-sky-500">
+                    <option value="Full-Stack Web Application">Full-Stack Web Application &amp; SaaS</option>
+                    <option value="Mobile App (iOS & Android)">Mobile App Development (iOS &amp; Android)</option>
+                    <option value="UI/UX Design System & Prototyping">UI/UX Design System &amp; Prototyping</option>
+                    <option value="Cloud Architecture, API & DevOps">Cloud Architecture, API &amp; DevOps</option>
+                    <option value="Interactive 3D & Creative Frontend">Interactive 3D &amp; Creative Frontend</option>
+                    <option value="Technical Audit & Kolaborasi Komunitas">Technical Audit / Kolaborasi Komunitas</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="contact-member-target" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1.5">Tujuan Diskusi / PIC</label>
+                  <select id="contact-member-target" class="w-full px-3.5 py-2.5 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white focus:outline-none focus:border-sky-500">
+                    <option value="Seluruh Tim (General Workgroup)">Seluruh Tim (General Workgroup)</option>
+                    <option value="Rafly (Systems & Architecture)">Rafly — Systems &amp; Architecture</option>
+                    <option value="Defarel (Frontend & Design Eng)">Defarel — Frontend &amp; Design Eng</option>
+                    <option value="Yanda (Backend & Distributed API)">Yanda — Backend &amp; Distributed API</option>
+                    <option value="Nabil (Product Design & UI/UX)">Nabil — Product Design &amp; UI/UX</option>
+                    <option value="Nadip (Mobile & Cloud Native)">Nadip — Mobile &amp; Cloud Native</option>
+                    <option value="Maman (DevOps & Security)">Maman — DevOps &amp; Security</option>
+                    <option value="Hujan (Creative Tech & QA)">Hujan — Creative Tech &amp; QA</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="contact-message" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1.5">Deskripsi Proyek / Pesan *</label>
+                <textarea id="contact-message" rows="4" required placeholder="Ceritakan gambaran singkat proyek, target waktu rilis, atau kolaborasi yang ingin didiskusikan..." class="w-full px-3.5 py-2.5 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-sky-500"></textarea>
+              </div>
+
+              <div class="pt-2 flex flex-wrap items-center gap-3">
+                <button type="submit" class="px-5 py-3 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-display font-semibold text-xs sm:text-sm hover:bg-sky-600 dark:hover:bg-sky-400 transition">
+                  Kirim Pesan &amp; Buat Tiket Diskusi
+                </button>
+                <button id="btn-send-wa-direct" type="button" class="px-4 py-3 rounded-lg border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 font-mono text-xs hover:bg-emerald-500/20 transition inline-flex items-center gap-2">
+                  <span>Kirim Form Ini via WhatsApp</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </button>
+              </div>
+            </form>
+
+            <!-- Submitted Messages / Ticket Log Preview -->
+            <div id="submitted-tickets-container" class="hidden mt-6 pt-6 border-t border-zinc-200 dark:border-white/10">
+              <div class="font-mono text-xs text-emerald-600 dark:text-emerald-400 mb-2">✓ TIKET DISKUSI TERCATAT DI SESI INI</div>
+              <div id="submitted-tickets-list" class="space-y-2"></div>
+            </div>
+          </div>
+
+          <!-- 6.2 EMAIL, 6.3 WHATSAPP, 6.4 ALAMAT, 6.5 SOCIAL MEDIA (Right 5 Columns) -->
+          <div class="lg:col-span-5 space-y-4">
+            
+            <!-- 6.2 Email Card -->
+            <div class="p-5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 flex items-start justify-between gap-4">
+              <div>
+                <div class="font-mono text-[11px] text-sky-600 dark:text-sky-400 uppercase">06.B // EMAIL RESMI</div>
+                <div id="contact-email-display" class="font-mono font-semibold text-sm sm:text-base text-zinc-900 dark:text-white mt-1">hello@hujancollective.id</div>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Untuk dokumen RFP, proposal teknis, &amp; kemitraan resmi</p>
+              </div>
+              <button id="btn-copy-email" type="button" class="px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:border-sky-500 transition shrink-0">
+                Salin
+              </button>
+            </div>
+
+            <!-- 6.3 Nomor WhatsApp Card -->
+            <div class="p-5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900 flex items-start justify-between gap-4">
+              <div>
+                <div class="font-mono text-[11px] text-emerald-600 dark:text-emerald-400 uppercase">06.C // NOMOR WHATSAPP</div>
+                <div id="contact-wa-display" class="font-mono font-semibold text-sm sm:text-base text-zinc-900 dark:text-white mt-1">+62 812-8840-2026</div>
+                <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-1">Senin–Jumat (09.00 – 21.00 WIB) · Respons Cepat</p>
+              </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <button id="btn-copy-wa" type="button" class="px-2.5 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:border-sky-500 transition">
+                  Salin
+                </button>
+                <button id="btn-open-wa-card" type="button" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-mono transition">
+                  Chat
+                </button>
+              </div>
+            </div>
+
+            <!-- 6.4 Alamat Studio -->
+            <div class="p-5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900">
+              <div class="font-mono text-[11px] text-sky-600 dark:text-sky-400 uppercase">06.D // ALAMAT &amp; BASECAMP</div>
+              <h4 id="contact-address-title" class="font-display font-bold text-base text-zinc-900 dark:text-white mt-1">
+                Hujan Studio // Kemang &amp; South Quarter Hub
+              </h4>
+              <p id="contact-address-detail" class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mt-1 leading-relaxed">
+                Jl. R.A. Kartini Kav. 8, Cilandak Barat, Jakarta Selatan 12430, Indonesia<br />
+                <span class="font-mono text-[11px] text-zinc-500">Operasional: Hybrid Studio &amp; Remote-First Distributed Workgroup</span>
+              </p>
+            </div>
+
+            <!-- 6.5 Social Media -->
+            <div class="p-5 rounded-xl border border-zinc-200/90 dark:border-white/[0.08] bg-white dark:bg-carbon-900">
+              <div class="font-mono text-[11px] text-sky-600 dark:text-sky-400 uppercase mb-3">06.E // SOCIAL MEDIA &amp; REPOSITORIES</div>
+              <div class="grid grid-cols-2 gap-2.5">
+                <button type="button" data-social="github.com/hujan-collective" class="social-copy-btn p-3 rounded-lg border border-zinc-200 dark:border-white/[0.07] bg-zinc-50 dark:bg-carbon-950 hover:border-sky-500/50 transition text-left flex items-center justify-between">
+                  <div>
+                    <div class="font-display font-semibold text-xs text-zinc-900 dark:text-white">GitHub Org</div>
+                    <div class="font-mono text-[11px] text-zinc-500">@hujan-collective</div>
+                  </div>
+                  <span class="font-mono text-xs text-zinc-400">↗</span>
+                </button>
+                <button type="button" data-social="instagram.com/hujan.collective" class="social-copy-btn p-3 rounded-lg border border-zinc-200 dark:border-white/[0.07] bg-zinc-50 dark:bg-carbon-950 hover:border-sky-500/50 transition text-left flex items-center justify-between">
+                  <div>
+                    <div class="font-display font-semibold text-xs text-zinc-900 dark:text-white">Instagram</div>
+                    <div class="font-mono text-[11px] text-zinc-500">@hujan.collective</div>
+                  </div>
+                  <span class="font-mono text-xs text-zinc-400">↗</span>
+                </button>
+                <button type="button" data-social="linkedin.com/company/hujan-collective" class="social-copy-btn p-3 rounded-lg border border-zinc-200 dark:border-white/[0.07] bg-zinc-50 dark:bg-carbon-950 hover:border-sky-500/50 transition text-left flex items-center justify-between">
+                  <div>
+                    <div class="font-display font-semibold text-xs text-zinc-900 dark:text-white">LinkedIn</div>
+                    <div class="font-mono text-[11px] text-zinc-500">Hujan Collective</div>
+                  </div>
+                  <span class="font-mono text-xs text-zinc-400">↗</span>
+                </button>
+                <button type="button" data-social="discord.gg/hujan-rdynm" class="social-copy-btn p-3 rounded-lg border border-zinc-200 dark:border-white/[0.07] bg-zinc-50 dark:bg-carbon-950 hover:border-sky-500/50 transition text-left flex items-center justify-between">
+                  <div>
+                    <div class="font-display font-semibold text-xs text-zinc-900 dark:text-white">Discord Server</div>
+                    <div class="font-mono text-[11px] text-zinc-500">RDYNM Community</div>
+                  </div>
+                  <span class="font-mono text-xs text-zinc-400">↗</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ARCHITECTURAL FOOTER -->
+  <footer class="border-t border-zinc-200/80 dark:border-white/[0.08] bg-white dark:bg-carbon-950 py-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-sky-500"></span>
+          <span class="font-display font-bold text-sm text-zinc-900 dark:text-white brand-name-inline">HUJAN COLLECTIVE</span>
+          <span class="font-mono text-xs text-zinc-500">// RDYNM WORKGROUP</span>
+        </div>
+        <p class="font-mono text-xs text-zinc-500 dark:text-zinc-400">
+          Built with precision by Rafly · Defarel · Yanda · Nabil · Nadip · Maman · Hujan
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-zinc-500 dark:text-zinc-400">
+        <a href="#home" data-nav="home" class="nav-link hover:text-zinc-900 dark:hover:text-white">HOME</a>
+        <a href="#about" data-nav="about" class="nav-link hover:text-zinc-900 dark:hover:text-white">ABOUT</a>
+        <a href="#team" data-nav="team" class="nav-link hover:text-zinc-900 dark:hover:text-white">TEAM</a>
+        <a href="#projects" data-nav="projects" class="nav-link hover:text-zinc-900 dark:hover:text-white">PROJECTS</a>
+        <a href="#services" data-nav="services" class="nav-link hover:text-zinc-900 dark:hover:text-white">SERVICES</a>
+        <a href="#contact" data-nav="contact" class="nav-link hover:text-zinc-900 dark:hover:text-white">CONTACT</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================================================================= -->
+  <!-- INTERACTIVE MODALS (Project Live Preview, Member Dossier,         -->
+  <!-- Studio Customizer, Command Palette, Toast)                        -->
+  <!-- ================================================================= -->
+
+  <!-- 1. PROJECT CASE STUDY & LIVE PREVIEW MODAL -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-zinc-300 dark:border-white/15 bg-white dark:bg-carbon-900 shadow-2xl">
+      <div class="sticky top-0 z-20 px-6 py-4 border-b border-zinc-200 dark:border-white/10 bg-white/95 dark:bg-carbon-900/95 backdrop-blur flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <span id="modal-proj-year" class="font-mono text-xs px-2 py-0.5 rounded bg-sky-500/15 text-sky-600 dark:text-sky-400 font-semibold">2026</span>
+          <span id="modal-proj-category" class="font-mono text-xs text-zinc-500 dark:text-zinc-400">Web App &amp; SaaS</span>
+        </div>
+        <button id="btn-close-project-modal" type="button" class="p-1.5 rounded-lg border border-zinc-200 dark:border-white/10 text-zinc-500 hover:text-zinc-900 dark:hover:text-white">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-6 space-y-6">
+        <div id="modal-proj-visual" class="rounded-xl overflow-hidden border border-zinc-200 dark:border-white/10 bg-carbon-950 aspect-video relative">
+          <!-- Populated dynamically -->
+        </div>
+        <div>
+          <h3 id="modal-proj-title" class="font-display font-bold text-2xl text-zinc-900 dark:text-white">Nama Proyek</h3>
+          <p id="modal-proj-desc" class="mt-2 text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed"></p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-zinc-50 dark:bg-carbon-950 border border-zinc-200/80 dark:border-white/[0.07]">
+          <div>
+            <div class="font-mono text-[11px] text-zinc-400 uppercase mb-1.5">TEKNOLOGI YANG DIGUNAKAN</div>
+            <div id="modal-proj-tech" class="flex flex-wrap gap-1.5"></div>
+          </div>
+          <div>
+            <div class="font-mono text-[11px] text-zinc-400 uppercase mb-1.5">KONTRIBUTOR WORKGROUP</div>
+            <div id="modal-proj-contributors" class="flex flex-wrap gap-1.5"></div>
+          </div>
+        </div>
+        <div class="p-4 rounded-xl border border-zinc-200/80 dark:border-white/[0.07] space-y-2">
+          <div class="font-mono text-xs text-sky-600 dark:text-sky-400">ARSITEKTUR &amp; METRIK PRODUKSI</div>
+          <p id="modal-proj-arch" class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed"></p>
+        </div>
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-zinc-200 dark:border-white/10">
+          <div class="font-mono text-xs text-zinc-500">
+            Endpoint: <span id="modal-proj-link" class="text-zinc-800 dark:text-zinc-200 underline">https://demo.hujancollective.id</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button id="btn-copy-proj-link" type="button" class="px-3.5 py-2 rounded-lg border border-zinc-300 dark:border-zinc-700 text-xs font-mono text-zinc-700 dark:text-zinc-300 hover:border-sky-500">
+              Salin Link Preview
+            </button>
+            <button id="btn-inquire-similar-proj" type="button" class="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-display font-semibold text-xs hover:bg-sky-500 transition">
+              Bangun Proyek Serupa →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. TEAM MEMBER DOSSIER & EDIT MODAL -->
+  <div id="member-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-2xl border border-zinc-300 dark:border-white/15 bg-white dark:bg-carbon-900 shadow-2xl">
+      <div class="px-6 py-4 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between">
+        <span class="font-mono text-xs text-sky-600 dark:text-sky-400">03 // PROFIL &amp; PENGATURAN ANGGOTA TIM</span>
+        <button id="btn-close-member-modal" type="button" class="p-1.5 rounded-lg border border-zinc-200 dark:border-white/10 text-zinc-500 hover:text-zinc-900 dark:hover:text-white">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <form id="member-edit-form" class="p-6 space-y-4">
+        <input type="hidden" id="edit-member-id" />
+        <div class="flex items-center gap-4">
+          <div id="edit-member-avatar-preview" class="w-16 h-16 rounded-xl overflow-hidden border border-zinc-300 dark:border-white/15 shrink-0 bg-zinc-800 flex items-center justify-center"></div>
+          <div class="space-y-1.5">
+            <button id="btn-trigger-photo-upload" type="button" class="px-3 py-1.5 rounded-lg bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 font-mono text-xs font-medium hover:bg-sky-500 transition">
+              Upload Foto dari Perangkat
+            </button>
+            <p class="text-[11px] font-mono text-zinc-500">Mendukung JPG, PNG, WebP (diproses langsung di browser)</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="edit-member-name" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Nama Anggota *</label>
+            <input id="edit-member-name" type="text" required class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white" />
+          </div>
+          <div>
+            <label for="edit-member-role" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Role / Posisi *</label>
+            <input id="edit-member-role" type="text" required class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="edit-member-division" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Divisi Utama</label>
+            <select id="edit-member-division" class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white">
+              <option value="Architecture & Backend">Backend &amp; Systems</option>
+              <option value="Frontend & Design">Frontend &amp; UI/UX</option>
+              <option value="Mobile, Cloud & Ops">Mobile, Cloud &amp; Ops</option>
+            </select>
+          </div>
+          <div>
+            <label for="edit-member-skills" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Skill / Keahlian (pisahkan koma)</label>
+            <input id="edit-member-skills" type="text" required class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white" />
+          </div>
+        </div>
+        <div>
+          <label for="edit-member-bio" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Deskripsi Singkat Anggota *</label>
+          <textarea id="edit-member-bio" rows="3" required class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white"></textarea>
+        </div>
+        <div class="flex items-center justify-between pt-3 border-t border-zinc-200 dark:border-white/10">
+          <label class="inline-flex items-center gap-2 text-xs font-mono text-zinc-600 dark:text-zinc-300">
+            <input type="checkbox" id="edit-member-active" class="rounded border-zinc-300" checked />
+            <span>Tampilkan di daftar anggota aktif</span>
+          </label>
+          <button type="submit" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-zinc-950 font-display font-bold text-xs transition">
+            Simpan Perubahan Anggota
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. ADD PROJECT MODAL -->
+  <div id="add-project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-2xl border border-zinc-300 dark:border-white/15 bg-white dark:bg-carbon-900 shadow-2xl">
+      <div class="px-6 py-4 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between">
+        <span class="font-mono text-xs text-sky-600 dark:text-sky-400">04 // TAMBAH PROYEK PORTFOLIO BARU</span>
+        <button id="btn-close-add-project" type="button" class="p-1.5 rounded-lg border border-zinc-200 dark:border-white/10 text-zinc-500 hover:text-zinc-900 dark:hover:text-white">✕</button>
+      </div>
+      <form id="add-project-form" class="p-6 space-y-4">
+        <div>
+          <label for="new-proj-title" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Nama Proyek *</label>
+          <input id="new-proj-title" type="text" required placeholder="Contoh: RintikPay Enterprise Gateway" class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white" />
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label for="new-proj-cat" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Kategori</label>
+            <select id="new-proj-cat" class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white">
+              <option value="Web App & SaaS">Web App &amp; SaaS</option>
+              <option value="Mobile & IoT">Mobile &amp; IoT</option>
+              <option value="Design System & 3D">Design System &amp; 3D</option>
+              <option value="Open Source & Infra">Open Source &amp; Infra</option>
+            </select>
+          </div>
+          <div>
+            <label for="new-proj-year" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Tahun</label>
+            <select id="new-proj-year" class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white">
+              <option value="2026">2026</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="new-proj-tech" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Teknologi yang Digunakan (pisahkan koma) *</label>
+          <input id="new-proj-tech" type="text" required placeholder="Next.js, Go, PostgreSQL, Tailwind" class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white" />
+        </div>
+        <div>
+          <label for="new-proj-desc" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Deskripsi Singkat *</label>
+          <textarea id="new-proj-desc" rows="3" required placeholder="Ringkasan solusi teknis dan dampak proyek..." class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white"></textarea>
+        </div>
+        <div>
+          <label for="new-proj-link" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1">Link / Preview URL</label>
+          <input id="new-proj-link" type="text" value="https://preview.hujancollective.id/app" class="w-full px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white" />
+        </div>
+        <div class="flex justify-end pt-2">
+          <button type="submit" class="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-400 text-zinc-950 font-display font-bold text-xs transition">
+            Tambahkan ke Portfolio
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. WORKGROUP IDENTITY & ROSTER CUSTOMIZER MODAL -->
+  <div id="customizer-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/75 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-2xl border border-zinc-300 dark:border-white/15 bg-white dark:bg-carbon-900 shadow-2xl">
+      <div class="px-6 py-4 border-b border-zinc-200 dark:border-white/10 flex items-center justify-between">
+        <span class="font-mono text-xs text-sky-600 dark:text-sky-400"> PENGATURAN IDENTITAS WORKGROUP</span>
+        <button id="btn-close-customizer" type="button" class="p-1.5 rounded-lg border border-zinc-200 dark:border-white/10 text-zinc-500 hover:text-zinc-900 dark:hover:text-white">✕</button>
+      </div>
+      <div class="p-6 space-y-5">
+        <div>
+          <label class="block font-mono text-xs text-zinc-500 dark:text-zinc-400 mb-2">PILIH PRESET NAMA KOMUNITAS / WORKGROUP</label>
+          <div class="grid grid-cols-1 gap-2">
+            <button type="button" data-brand-preset="HUJAN COLLECTIVE|RDYNM|HJN" class="brand-preset-btn p-3 rounded-lg border border-zinc-300 dark:border-white/10 text-left hover:border-sky-500 transition flex items-center justify-between">
+              <div>
+                <div class="font-display font-bold text-sm text-zinc-900 dark:text-white">HUJAN COLLECTIVE</div>
+                <div class="font-mono text-[11px] text-zinc-500">Kode: RDYNM (Rafly · Defarel · Yanda · Nabil · Nadip · Maman · Hujan)</div>
+              </div>
+              <span class="font-mono text-xs text-sky-500">Pilih</span>
+            </button>
+            <button type="button" data-brand-preset="RADYNAM HUJAN STUDIO|RDYNM-HJN|RDY" class="brand-preset-btn p-3 rounded-lg border border-zinc-300 dark:border-white/10 text-left hover:border-sky-500 transition flex items-center justify-between">
+              <div>
+                <div class="font-display font-bold text-sm text-zinc-900 dark:text-white">RADYNAM HUJAN STUDIO</div>
+                <div class="font-mono text-[11px] text-zinc-500">Akronim Gabungan Nama Anggota + Hujan</div>
+              </div>
+              <span class="font-mono text-xs text-sky-500">Pilih</span>
+            </button>
+            <button type="button" data-brand-preset="MAMAN HUJAN WORKGROUP|RDYNN|MHW" class="brand-preset-btn p-3 rounded-lg border border-zinc-300 dark:border-white/10 text-left hover:border-sky-500 transition flex items-center justify-between">
+              <div>
+                <div class="font-display font-bold text-sm text-zinc-900 dark:text-white">MAMAN HUJAN WORKGROUP</div>
+                <div class="font-mono text-[11px] text-zinc-500">Formasi 5 Core (Rafly · Defarel · Yanda · Nabil · Nadip)</div>
+              </div>
+              <span class="font-mono text-xs text-sky-500">Pilih</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-3 border-t border-zinc-200 dark:border-white/10">
+          <label for="custom-brand-input" class="block font-mono text-xs text-zinc-600 dark:text-zinc-300 mb-1.5">Atau Ketik Nama Workgroup Kustom</label>
+          <div class="flex gap-2">
+            <input id="custom-brand-input" type="text" value="HUJAN COLLECTIVE" class="flex-1 px-3 py-2 rounded-lg text-sm bg-zinc-50 dark:bg-carbon-950 border border-zinc-300 dark:border-white/10 text-zinc-900 dark:text-white" />
+            <button id="btn-apply-custom-brand" type="button" class="px-4 py-2 rounded-lg bg-sky-500 text-zinc-950 font-display font-bold text-xs">
+              Terapkan
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. COMMAND PALETTE (⌘K) -->
+  <div id="cmd-modal" class="fixed inset-0 z-50 hidden items-start justify-center pt-20 p-4 bg-black/70 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-xl border border-zinc-300 dark:border-white/15 bg-white dark:bg-carbon-900 shadow-2xl overflow-hidden">
+      <div class="p-3 border-b border-zinc-200 dark:border-white/10 flex items-center gap-2">
+        <span class="font-mono text-xs text-sky-500">⌘K</span>
+        <input id="cmd-input" type="text" placeholder="Ketik bagian halaman, nama anggota, atau aksi..." class="w-full text-sm font-mono bg-transparent text-zinc-900 dark:text-white focus:outline-none" />
+        <button id="btn-close-cmd" type="button" class="text-xs font-mono text-zinc-400 px-1.5 py-0.5 rounded border border-zinc-200 dark:border-white/10">ESC</button>
+      </div>
+      <div id="cmd-list" class="max-h-72 overflow-y-auto p-2 space-y-1 font-mono text-xs">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 hidden items-center gap-2.5 px-4 py-3 rounded-xl border border-zinc-700 bg-zinc-900 text-white shadow-xl font-mono text-xs">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toast-message">Berhasil disalin</span>
+  </div>
+
+  <!-- APPLICATION LOGIC -->
+  <script src="js/app.js"></script>
+</body>
+</html>
