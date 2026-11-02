@@ -1,6 +1,6 @@
 /**
  * HUJAN COLLECTIVE (RDYNM Workgroup) — Main Application Logic
- * Roster: Rafly, Defarel, Yanda, Nabil, Nadip, Maman, Hujan
+ * Roster: Rafly, Defarel, Yanda, Nabil, Nadip, Khadaffi, Hujan
  */
 
 (function() {
